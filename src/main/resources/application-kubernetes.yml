@@ -1,0 +1,14 @@
+spring:
+  config:
+    import: "kubernetes:"
+  application:
+    name: search-backend
+  cloud:
+    kubernetes:
+      config:
+        paths:
+          - /etc/application/application.yml
+        enable-api: false
+      reload:
+        enabled:
+          false

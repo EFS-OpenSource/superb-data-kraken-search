@@ -1,0 +1,9 @@
+site_name: Search Service
+repo_url: https://dev.azure.com/EFSCIS/EFS-SDK/_git/search
+site_description: Documentation for the Search Service of the Superb Data Kraken
+
+nav:
+  - Home: index.md
+
+plugins:
+  - techdocs-core

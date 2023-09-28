@@ -1,0 +1,54 @@
+{
+  "size": 20,
+  "page": 0,
+  "max": 4,
+  "hits": [
+    {
+      "metadata": {
+        "project": {
+          "projectType": "external",
+          "projectId": "sdk"
+        },
+        "customer": {
+          "customerInfo": "demo"
+        }
+      }
+    },
+    {
+      "metadata": {
+        "project": {
+          "projectType": "external",
+          "projectId": "sdk"
+        },
+        "customer": {
+          "customerInfo": "demo"
+        }
+      }
+    },
+    {
+      "metadata": {
+        "project": {
+          "projectType": "external",
+          "projectId": "sdk"
+        },
+        "customer": {
+          "customerInfo": "other demo"
+        }
+      }
+    },
+    {
+      "metadata": {
+        "project": {
+          "projectType": "external",
+          "projectId": "sdk"
+        },
+        "customer": {
+          "customerInfo": "demo"
+        }
+      }
+    }
+  ],
+  "aggregations": [],
+  "duration": 60,
+  "max_results": 4
+}

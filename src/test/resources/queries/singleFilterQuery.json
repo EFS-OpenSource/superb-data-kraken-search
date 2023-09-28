@@ -1,0 +1,17 @@
+{
+  "size": 20,
+  "filter": [
+    {
+      "property": "metadata.customer.customerId",
+      "operator": "EQ",
+      "value": "efs",
+      "dataType": "STRING"
+    }
+  ],
+  "resultProperties": [
+    "metadata.customer.customerInfo",
+    "metadata.project.projectInfo",
+    "metadata.project.projectId"
+  ],
+  "page": 0
+}

@@ -1,0 +1,27 @@
+{
+  "size": 20,
+  "page": 0,
+  "hits": [
+    {
+      "metadata": {
+        "project": {
+          "projectId": "sdk"
+        },
+        "customer": {
+          "customerInfo": "demo1"
+        }
+      }
+    },
+    {
+      "metadata": {
+        "project": {
+          "projectId": "sdk"
+        },
+        "customer": {
+          "customerInfo": "demo2"
+        }
+      }
+    }
+  ],
+  "max_results": 2
+}

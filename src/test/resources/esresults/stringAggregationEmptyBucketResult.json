@@ -1,0 +1,54 @@
+{
+  "took": 2,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 4,
+      "relation": "eq"
+    },
+    "max_score": 0.10536051,
+    "hits": [
+      {
+        "_index": "test",
+        "_type": "_doc",
+        "_id": "6bf24268-46e3-404d-abfd-421c7c7642bb",
+        "_score": 0.10536051,
+        "_source": {}
+      },
+      {
+        "_index": "test",
+        "_type": "_doc",
+        "_id": "6bf24268-46e3-404d-abfd-421c7c7642aa",
+        "_score": 0.10536051,
+        "_source": {}
+      },
+      {
+        "_index": "test",
+        "_type": "_doc",
+        "_id": "6bf24268-46e3-404d-abfd-421c7c764cc",
+        "_score": 0.10536051,
+        "_source": {}
+      },
+      {
+        "_index": "test",
+        "_type": "_doc",
+        "_id": "6bf24268-46e3-404d-abfd-421c7c764dd",
+        "_score": 0.10536051,
+        "_source": {}
+      }
+    ]
+  },
+  "aggregations": {
+    "filter_metadata.customer.customerId": {
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 0,
+      "buckets": []
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "size": 20,
+  "query": {
+    "query_string": {
+      "query": "metadata.customer.customerId:efs"
+    }
+  },
+  "from": 0,
+  "_source": [
+    "metadata.customer.customerInfo",
+    "metadata.project.projectInfo",
+    "metadata.project.projectId"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "size": 20,
+  "query": {
+    "query_string": {
+      "query": "NOT metadata.customer.customerId:efs"
+    }
+  },
+  "from": 0
+}

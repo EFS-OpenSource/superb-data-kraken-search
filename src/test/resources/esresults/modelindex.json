@@ -1,0 +1,153 @@
+{
+  "took": 4,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 3,
+      "relation": "eq"
+    },
+    "max_score": 1.0,
+    "hits": [
+      {
+        "_index": "modelindex",
+        "_id": "sdkcorestorage_sdkdemo_measurements",
+        "_score": 1.0,
+        "_source": {
+          "massdata": {
+            "type": "",
+            "properties": {
+              "dateCreated": {
+                "type": "date",
+                "properties": null,
+                "enabled": true
+              },
+              "location": {
+                "type": "text",
+                "properties": null,
+                "enabled": true
+              },
+              "name": {
+                "type": "text",
+                "properties": null,
+                "enabled": true
+              },
+              "size": {
+                "type": "long",
+                "properties": null,
+                "enabled": true
+              }
+            },
+            "enabled": true
+          },
+          "metadata": {
+            "type": "",
+            "properties": {
+              "dateTime": {
+                "type": "",
+                "properties": {
+                  "createdAt": {
+                    "type": "date",
+                    "properties": null,
+                    "enabled": true
+                  }
+                },
+                "enabled": true
+              },
+              "description": {
+                "type": "text",
+                "properties": null,
+                "enabled": true
+              },
+              "environment": {
+                "type": "",
+                "properties": {
+                  "name": {
+                    "type": "text",
+                    "properties": null,
+                    "enabled": true
+                  }
+                },
+                "enabled": true
+              },
+              "name": {
+                "type": "text",
+                "properties": null,
+                "enabled": true
+              },
+              "project": {
+                "type": "",
+                "properties": {
+                  "confidentiality": {
+                    "type": "text",
+                    "properties": null,
+                    "enabled": true
+                  },
+                  "name": {
+                    "type": "text",
+                    "properties": null,
+                    "enabled": true
+                  },
+                  "purpose": {
+                    "type": "text",
+                    "properties": null,
+                    "enabled": true
+                  },
+                  "type": {
+                    "type": "text",
+                    "properties": null,
+                    "enabled": true
+                  }
+                },
+                "enabled": true
+              },
+              "scope": {
+                "type": "",
+                "properties": {
+                  "confidentiality": {
+                    "type": "text",
+                    "properties": null,
+                    "enabled": true
+                  },
+                  "name": {
+                    "type": "text",
+                    "properties": null,
+                    "enabled": true
+                  },
+                  "purpose": {
+                    "type": "text",
+                    "properties": null,
+                    "enabled": true
+                  }
+                },
+                "enabled": true
+              }
+            },
+            "enabled": true
+          },
+          "organization": {
+            "type": "text",
+            "properties": null,
+            "enabled": true
+          },
+          "space": {
+            "type": "text",
+            "properties": null,
+            "enabled": true
+          },
+          "uuid": {
+            "type": "text",
+            "properties": null,
+            "enabled": true
+          },
+          "index_name": "sdkcorestorage_sdkdemo_measurements"
+        }
+      }
+    ]
+  }
+}

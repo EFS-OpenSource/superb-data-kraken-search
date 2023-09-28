@@ -1,0 +1,20 @@
+[
+  "metadata.dateTime.createdAt",
+  "metadata.description",
+  "metadata.scope.confidentiality",
+  "massdata.size",
+  "metadata.scope.name",
+  "metadata.project.confidentiality",
+  "metadata.project.type",
+  "massdata.dateCreated",
+  "metadata.scope.purpose",
+  "uuid",
+  "massdata.name",
+  "space",
+  "organization",
+  "metadata.environment.name",
+  "metadata.project.purpose",
+  "massdata.location",
+  "metadata.name",
+  "metadata.project.name"
+]

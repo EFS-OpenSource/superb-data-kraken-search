@@ -1,0 +1,23 @@
+{
+  "resultProperties": [],
+  "filter": [
+    {
+      "operator": "EQ",
+      "property": "metadata.project.projectId",
+      "value": "sdk"
+    },
+    {
+      "operator": "EQ",
+      "property": "metadata.project.projectId",
+      "value": "sdk2"
+    },
+    {
+      "operator": "EQ",
+      "property": "metadata.customer.customerId",
+      "value": "efs"
+    }
+  ],
+  "index_name": "test",
+  "page": 0,
+  "size": 20
+}

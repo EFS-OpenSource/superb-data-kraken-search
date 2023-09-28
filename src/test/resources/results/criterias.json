@@ -1,0 +1,176 @@
+[
+  {
+    "property": "metadata.description",
+    "operator": [
+      "EQ",
+      "NOT",
+      "LIKE"
+    ],
+    "dataType": "STRING"
+  },
+  {
+    "property": "metadata.scope.name",
+    "operator": [
+      "EQ",
+      "NOT",
+      "LIKE"
+    ],
+    "dataType": "STRING"
+  },
+  {
+    "property": "space",
+    "operator": [
+      "EQ",
+      "NOT",
+      "LIKE"
+    ],
+    "dataType": "STRING"
+  },
+  {
+    "property": "massdata.name",
+    "operator": [
+      "EQ",
+      "NOT",
+      "LIKE"
+    ],
+    "dataType": "STRING"
+  },
+  {
+    "property": "metadata.project.confidentiality",
+    "operator": [
+      "EQ",
+      "NOT",
+      "LIKE"
+    ],
+    "dataType": "STRING"
+  },
+  {
+    "property": "metadata.project.purpose",
+    "operator": [
+      "EQ",
+      "NOT",
+      "LIKE"
+    ],
+    "dataType": "STRING"
+  },
+  {
+    "property": "metadata.scope.confidentiality",
+    "operator": [
+      "EQ",
+      "NOT",
+      "LIKE"
+    ],
+    "dataType": "STRING"
+  },
+  {
+    "property": "massdata.dateCreated",
+    "operator": [
+      "EQ",
+      "NOT",
+      "LT",
+      "LTE",
+      "GT",
+      "GTE",
+      "BETWEEN"
+    ],
+    "dataType": "DATE"
+  },
+  {
+    "property": "massdata.size",
+    "operator": [
+      "EQ",
+      "NOT",
+      "LT",
+      "LTE",
+      "GT",
+      "GTE",
+      "BETWEEN"
+    ],
+    "dataType": "NUMBER"
+  },
+  {
+    "property": "metadata.project.name",
+    "operator": [
+      "EQ",
+      "NOT",
+      "LIKE"
+    ],
+    "dataType": "STRING"
+  },
+  {
+    "property": "organization",
+    "operator": [
+      "EQ",
+      "NOT",
+      "LIKE"
+    ],
+    "dataType": "STRING"
+  },
+  {
+    "property": "metadata.project.type",
+    "operator": [
+      "EQ",
+      "NOT",
+      "LIKE"
+    ],
+    "dataType": "STRING"
+  },
+  {
+    "property": "metadata.scope.purpose",
+    "operator": [
+      "EQ",
+      "NOT",
+      "LIKE"
+    ],
+    "dataType": "STRING"
+  },
+  {
+    "property": "massdata.location",
+    "operator": [
+      "EQ",
+      "NOT",
+      "LIKE"
+    ],
+    "dataType": "STRING"
+  },
+  {
+    "property": "metadata.name",
+    "operator": [
+      "EQ",
+      "NOT",
+      "LIKE"
+    ],
+    "dataType": "STRING"
+  },
+  {
+    "property": "metadata.dateTime.createdAt",
+    "operator": [
+      "EQ",
+      "NOT",
+      "LT",
+      "LTE",
+      "GT",
+      "GTE",
+      "BETWEEN"
+    ],
+    "dataType": "DATE"
+  },
+  {
+    "property": "uuid",
+    "operator": [
+      "EQ",
+      "NOT",
+      "LIKE"
+    ],
+    "dataType": "STRING"
+  },
+  {
+    "property": "metadata.environment.name",
+    "operator": [
+      "EQ",
+      "NOT",
+      "LIKE"
+    ],
+    "dataType": "STRING"
+  }
+]

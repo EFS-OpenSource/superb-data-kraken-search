@@ -1,0 +1,10 @@
+{
+  "size": 20,
+  "query": {
+    "query_string": {
+      "query": "metadata.customer.customerId:efs AND metadata.project.projectId:( sdk OR sdk2 )",
+      "analyze_wildcard": "true"
+    }
+  },
+  "from": 0
+}

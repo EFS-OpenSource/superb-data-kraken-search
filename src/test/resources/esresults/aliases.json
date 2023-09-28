@@ -1,0 +1,36 @@
+{
+  ".async-search": {
+    "aliases": {}
+  },
+  ".ds-ilm-history-5-2021.04.27-000002": {
+    "aliases": {}
+  },
+  ".kibana_1": {
+    "aliases": {
+      ".kibana": {}
+    }
+  },
+  ".apm-custom-link": {
+    "aliases": {}
+  },
+  "test-index": {
+    "aliases": {}
+  },
+  "test-index-2": {
+    "aliases": {}
+  },
+  "securityinfo": {
+    "aliases": {}
+  },
+  ".kibana_task_manager_1": {
+    "aliases": {
+      ".kibana_task_manager": {}
+    }
+  },
+  ".apm-agent-configuration": {
+    "aliases": {}
+  },
+  ".ds-ilm-history-5-2021.03.18-000001": {
+    "aliases": {}
+  }
+}

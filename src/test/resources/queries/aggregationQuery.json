@@ -1,0 +1,22 @@
+{
+  "resultProperties": [
+    "metadata.customer.customerInfo"
+  ],
+  "filter": [
+    {
+      "operator": "EQ",
+      "property": "metadata.customer.customerId",
+      "value": "efs"
+    }
+  ],
+  "aggregations": [
+    {
+      "property": "massdata.dateCreated",
+      "dataType": "DATE",
+      "size": 10
+    }
+  ],
+  "index_name": "test",
+  "page": 0,
+  "size": 20
+}

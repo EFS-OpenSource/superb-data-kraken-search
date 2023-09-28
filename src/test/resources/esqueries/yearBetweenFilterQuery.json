@@ -1,0 +1,9 @@
+{
+  "size": 20,
+  "query": {
+    "query_string": {
+      "query": "massdata.dateCreated:[ 2021-01-01||/y TO 2021-01-01||/y ]"
+    }
+  },
+  "from": 0
+}
