@@ -17,8 +17,9 @@ package com.efs.sdk.search.model.elasticsearch;
 
 import java.util.Map;
 
-public record ESFieldProperty(String type, Map<String, Object> fields, Map<String, ESFieldProperty> properties,
-                              Boolean enabled) {
+public record ESMappingFieldProperty(String type, Map<String, Object> fields,
+                                     Map<String, ESMappingFieldProperty> properties,
+                                     Boolean enabled, Boolean index) {
     public boolean isParent() {
         return properties != null;
     }

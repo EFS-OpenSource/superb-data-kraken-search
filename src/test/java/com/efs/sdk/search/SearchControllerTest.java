@@ -71,6 +71,7 @@ class SearchControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+
     @Test
     void givenNoAuthentication_whenGetIndexes_thenError() throws Exception {
         mvc.perform(get(ENDPOINT + "/index")).andExpect(status().isUnauthorized());
@@ -79,7 +80,7 @@ class SearchControllerTest {
     @Test
     void givenAuthentication_whenGetIndexes_thenOk() throws Exception {
         Set<String> indexes = Set.of("test-index", "test-index2");
-        given(service.getIndexes(anyString(), anyString())).willReturn(indexes);
+        given(service.getIndices(any(), anyString())).willReturn(indexes);
 
         mvc.perform(get(ENDPOINT + "/index").with(jwt())).andExpect(status().isOk());
     }
@@ -110,7 +111,7 @@ class SearchControllerTest {
         List<String> resultProperties = List.of("prop1", "prop2");
 
         given(authHelper.getAccessToken(any())).willReturn(getAccessToken());
-        given(service.getResultProperties(anyString(), anyString())).willReturn(Set.copyOf(resultProperties));
+        given(service.getResultProperties(any(), anyString())).willReturn(Set.copyOf(resultProperties));
 
         mvc.perform(get(ENDPOINT + "/resultproperties").queryParam("index", "test").with(jwt())).andExpect(status().isOk()).andExpect(jsonPath("$.size()").value(2));
     }
@@ -125,7 +126,7 @@ class SearchControllerTest {
         List<Criteria> criterias = List.of(new Criteria("test", DATE), new Criteria("test2", STRING));
 
         given(authHelper.getAccessToken(any())).willReturn(getAccessToken());
-        given(service.getCriteria(anyString(), anyString())).willReturn(criterias);
+        given(service.getCriteria(any(), anyString())).willReturn(criterias);
 
         mvc.perform(get(ENDPOINT + "/criteria").with(jwt())).andExpect(status().isOk()).andExpect(jsonPath("$.size()").value(2));
     }
@@ -135,7 +136,7 @@ class SearchControllerTest {
         List<Criteria> criterias = List.of(new Criteria("test", DATE), new Criteria("test2", STRING));
 
         given(authHelper.getAccessToken(any())).willReturn(getAccessToken());
-        given(service.getCriteria(anyString(), anyString())).willReturn(criterias);
+        given(service.getCriteria(any(), anyString())).willReturn(criterias);
 
         mvc.perform(get(ENDPOINT + "/criteria").queryParam("index", "test").with(jwt())).andExpect(status().isOk()).andExpect(jsonPath("$.size()").value(2));
     }
@@ -146,7 +147,7 @@ class SearchControllerTest {
 
         given(authHelper.getAccessToken(any())).willReturn("something");
         SearchException sException = new SearchException(ERROR_CREATING_QUERY);
-        given(service.executeSearch(any(), anyString())).willThrow(sException);
+        given(service.executeSearch(any(), any())).willThrow(sException);
 
         MvcResult result = mvc.perform(post(ENDPOINT).with(jwt()).contentType(APPLICATION_JSON).content(objectMapper.writeValueAsString(query))).andReturn();
         MockHttpServletResponse response = result.getResponse();
@@ -159,7 +160,7 @@ class SearchControllerTest {
     void givenException_whenGetIndexes_thenError() throws Exception {
         given(authHelper.getAccessToken(any())).willReturn("something");
         SearchException sException = new SearchException(UNABLE_EXTRACT_RETURN_VALUE);
-        given(service.getIndexes(anyString(), anyString())).willThrow(sException);
+        given(service.getIndices(any(), anyString())).willThrow(sException);
 
         MvcResult result = mvc.perform(get(ENDPOINT + "/index").with(jwt())).andReturn();
         MockHttpServletResponse response = result.getResponse();
@@ -172,7 +173,7 @@ class SearchControllerTest {
     void givenException_whenGetCriteria_thenError() throws Exception {
         given(authHelper.getAccessToken(any())).willReturn("something");
         SearchException sException = new SearchException(UNABLE_EXTRACT_RETURN_VALUE);
-        given(service.getCriteria(anyString(), anyString())).willThrow(sException);
+        given(service.getCriteria(any(), anyString())).willThrow(sException);
 
         MvcResult result = mvc.perform(get(ENDPOINT + "/criteria").queryParam("index", "test").with(jwt())).andReturn();
         MockHttpServletResponse response = result.getResponse();
@@ -185,7 +186,7 @@ class SearchControllerTest {
     void givenException_whenGetResultProperties_thenError() throws Exception {
         given(authHelper.getAccessToken(any())).willReturn("something");
         SearchException sException = new SearchException(UNABLE_EXTRACT_RETURN_VALUE);
-        given(service.getResultProperties(anyString(), anyString())).willThrow(sException);
+        given(service.getResultProperties(any(), anyString())).willThrow(sException);
 
         MvcResult result = mvc.perform(get(ENDPOINT + "/resultproperties").queryParam("index", "test").with(jwt())).andReturn();
         MockHttpServletResponse response = result.getResponse();
@@ -199,7 +200,7 @@ class SearchControllerTest {
         List<Criteria> criterias = List.of(new Criteria("test", DATE), new Criteria("test2", STRING));
 
         given(authHelper.getAccessToken(any())).willReturn(getAccessToken());
-        given(service.getCriteria(anyString(), anyString())).willReturn(criterias);
+        given(service.getCriteria(any(), anyString())).willReturn(criterias);
 
         mvc.perform(get(ENDPOINT + "/criteria").with(jwt())).andExpect(status().isOk()).andExpect(jsonPath("$.size()").value(2));
     }

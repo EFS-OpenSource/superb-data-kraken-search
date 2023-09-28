@@ -66,7 +66,7 @@ public class SearchException extends Exception {
         UNABLE_EXTRACT_RETURN_VALUE(10013, HttpStatus.UNPROCESSABLE_ENTITY, "unable to extract elasticsearch-return-value"),
         UNABLE_EXTRACT_STRING_TO_OBJECT(10014, HttpStatus.UNPROCESSABLE_ENTITY, "unable to extract string to object:"),
         UNABLE_GET_ES_CLIENT(10015, HttpStatus.INTERNAL_SERVER_ERROR, "unable to connect to elasticsearch. Try again later..."),
-
+        EXTRACTION_ERROR_MAPPING(10020, HttpStatus.UNPROCESSABLE_ENTITY, "error parsing mapping-result"),
         UNKNOWN_ERROR(50000, HttpStatus.INTERNAL_SERVER_ERROR, "something unexpected happened.");
         // @formatter:on
 

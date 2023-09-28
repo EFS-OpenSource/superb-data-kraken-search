@@ -6,6 +6,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 1.1.0 - 2023-09-28
+
+### Added
+
+### Changed
+
+- workaround to get criteria, result properties and indices without all_access
+
+### Removed
+
+- none
+
+## Unreleased
+
+
 ## 1.0.0 - 2023-09-28
 
 ### Added

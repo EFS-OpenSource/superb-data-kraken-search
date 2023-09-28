@@ -21,14 +21,16 @@ data:
     search:
       elasticsearch:
         url: https://$(elasticsearch-service).elasticsearch.svc.cluster.local:9200
+      organizationmanager-endpoints:
+        spaces: http://organizationmanager$(postfix).backend.svc.cluster.local:8090/organizationmanager/api/v2.0/spaces
     management:
       endpoints:
         web:
           exposure:
             include: [
-                prometheus,
-                health,
-                info
+              prometheus,
+              health,
+              info
             ]
       health:
         elasticsearch:

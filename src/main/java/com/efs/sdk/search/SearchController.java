@@ -32,8 +32,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Set;
 
-import static java.lang.String.format;
-
 
 @RequestMapping(value = SearchController.ENDPOINT)
 @RestController
@@ -68,10 +66,10 @@ public class SearchController {
     @ApiResponse(responseCode = "200", description = "Successfully looked up indices.", useReturnTypeSchema = true)
     @ApiResponse(responseCode = "401", description = "User is not authorized")
     @ApiResponse(responseCode = "422", description = "The return-value could not be transformed into a result")
-    public ResponseEntity<Set<String>> getIndexes(@Parameter(hidden = true) JwtAuthenticationToken jwt, @Parameter(description = "index-filter", example =
-            ".*") @RequestParam(defaultValue = ".*") String filter) throws SearchException {
+    public ResponseEntity<Set<String>> getIndices(@Parameter(hidden = true) JwtAuthenticationToken jwt, @Parameter(description = "wildcard index filter", example =
+            "*") @RequestParam(defaultValue = "*") String filter) throws SearchException {
         String token = authHelper.getAccessToken(jwt);
-        return ResponseEntity.ok(searchService.getIndexes(token, filter == null ? ".*" : filter));
+        return ResponseEntity.ok(searchService.getIndices(token, (filter == null || filter.isEmpty()) ? "*" : filter));
     }
 
     @Operation(summary = """
@@ -83,14 +81,10 @@ public class SearchController {
     @ApiResponse(responseCode = "200", description = "Successfully looked up all possible criteria.", useReturnTypeSchema = true)
     @ApiResponse(responseCode = "401", description = "User is not authorized")
     @ApiResponse(responseCode = "422", description = "The return-value could not be transformed into a result")
-    public ResponseEntity<List<Criteria>> getCriteria(@Parameter(hidden = true) JwtAuthenticationToken jwt, @Parameter(description = "name of the index",
-            required = true) String index) throws SearchException {
+    public ResponseEntity<List<Criteria>> getCriteria(@Parameter(hidden = true) JwtAuthenticationToken jwt, @Parameter(description = "name of the index or wildcard",
+            example = "*") @RequestParam(defaultValue = "*") String index) throws SearchException {
         String token = authHelper.getAccessToken(jwt);
-        String indexRegex = ".*";
-        if (index != null && !index.isEmpty()) {
-            indexRegex = format(".*%s.*", index);
-        }
-        return ResponseEntity.ok(searchService.getCriteria(token, indexRegex));
+        return ResponseEntity.ok(searchService.getCriteria(token, (index == null || index.isEmpty()) ? "*" : index));
     }
 
     @Operation(summary = "Gets possible search-result-properties")
@@ -98,13 +92,9 @@ public class SearchController {
     @ApiResponse(responseCode = "200", description = "Successfully looked up all possible criteria.", useReturnTypeSchema = true)
     @ApiResponse(responseCode = "401", description = "User is not authorized")
     @ApiResponse(responseCode = "422", description = "The return-value could not be transformed into a result")
-    public ResponseEntity<Set<String>> getResultProperties(@Parameter(hidden = true) JwtAuthenticationToken jwt, @Parameter(description = "name of the index"
-            , required = true) String index) throws SearchException {
+    public ResponseEntity<Set<String>> getResultProperties(@Parameter(hidden = true) JwtAuthenticationToken jwt, @Parameter(description = "name of the index or wildcard",
+            example = "*") @RequestParam(defaultValue = "*") String index) throws SearchException {
         String token = authHelper.getAccessToken(jwt);
-        String indexRegex = ".*";
-        if (index != null && !index.isEmpty()) {
-            indexRegex = format(".*%s.*", index);
-        }
-        return ResponseEntity.ok(searchService.getResultProperties(token, indexRegex));
+        return ResponseEntity.ok(searchService.getResultProperties(token, (index == null || index.isEmpty()) ? "*" : index));
     }
 }
