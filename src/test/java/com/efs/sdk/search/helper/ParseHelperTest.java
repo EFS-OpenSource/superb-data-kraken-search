@@ -52,7 +52,7 @@ class ParseHelperTest {
         List<List<String>> stringList = parseHelper.splitListByMaxLength(testList, 20);
         List<String> flattenedList = stringList.stream()
                 .flatMap(List::stream)
-                .collect(Collectors.toList());
+                .toList();
         JSONAssert.assertEquals(testList.toString(), flattenedList.toString(), false);
     }
 
