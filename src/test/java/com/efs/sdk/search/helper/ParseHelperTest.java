@@ -1,8 +1,10 @@
 package com.efs.sdk.search.helper;
 
+import com.efs.sdk.search.commons.SearchException;
 import com.efs.sdk.search.model.elasticsearch.ESMappingFieldProperty;
 import com.efs.sdk.search.model.search.Criteria;
 import com.efs.sdk.search.model.search.DataType;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.CoreMatchers;
@@ -12,8 +14,8 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
+import static com.efs.sdk.search.commons.SearchException.SEARCH_ERROR.UNABLE_EXTRACT_STRING_TO_OBJECT;
 import static com.efs.sdk.search.utils.TestHelper.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,10 +34,18 @@ class ParseHelperTest {
 
     }
 
+    private <T> T readValue(String content, Class<T> clazz) throws SearchException {
+        try {
+            return objectMapper.readValue(content, clazz);
+        } catch (JsonProcessingException e) {
+            throw new SearchException(UNABLE_EXTRACT_STRING_TO_OBJECT, content);
+        }
+    }
+
     @Test
     void givenParseProperties_whenParseProperties_thenOk() throws Exception {
         String searchResult = getInputContent(ESRESULT_PATH, "sourceData.json");
-        Map<String, Object> tempProps = new ObjectMapper().readValue(searchResult, Map.class);
+        Map<String, Object> tempProps = readValue(searchResult, Map.class);
         Map<String, ESMappingFieldProperty> properties = new ObjectMapper().convertValue(tempProps, new TypeReference<>() {
         });
         Set<Criteria> criteria = new HashSet<>();
@@ -59,7 +69,7 @@ class ParseHelperTest {
     @Test
     void givenPropertyNames_whenGetPropertyNames_thenOk() throws Exception {
         String searchResult = getInputContent(ESRESULT_PATH, "sourceData.json");
-        Map<String, Object> tempProps = new ObjectMapper().readValue(searchResult, Map.class);
+        Map<String, Object> tempProps = readValue(searchResult, Map.class);
         Map<String, ESMappingFieldProperty> properties = new ObjectMapper().convertValue(tempProps, new TypeReference<>() {
         });
 
