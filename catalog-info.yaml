@@ -33,13 +33,11 @@ spec:
   dependsOn:
     - component:sdk-metadata-opensearch-service
     - component:sdk-operations-keycloak-service
-    - component:sdk-schema-manager-service
   providesApis:
     - sdk-metadata-search-api
   consumesApis:
     - sdk-metadata-opensearch-api
     - sdk-operations-keycloak-api
-    - sdk-metadata-schemamanager-api
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
