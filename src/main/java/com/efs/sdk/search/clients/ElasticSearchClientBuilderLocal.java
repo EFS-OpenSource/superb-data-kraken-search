@@ -33,9 +33,11 @@ import static java.lang.String.format;
 @Profile("local")
 public class ElasticSearchClientBuilderLocal extends ElasticSearchClientBuilder {
 
+    private final String pathPrefix;
 
-    ElasticSearchClientBuilderLocal(@Value("${search.elasticsearch.url}") String elasticsearchUrl) {
+    ElasticSearchClientBuilderLocal(@Value("${search.elasticsearch.url}") String elasticsearchUrl, @Value("${search.elasticsearch.localPathPrefix}") String pathPrefix) {
         super(elasticsearchUrl);
+        this.pathPrefix = pathPrefix;
     }
 
     public RestClient buildRestClient(String token) {
@@ -46,7 +48,7 @@ public class ElasticSearchClientBuilderLocal extends ElasticSearchClientBuilder 
             return RestClient.builder(HttpHost.create(elasticsearchUrl))
                     .setDefaultHeaders(defaultHeaders)
                     .setHttpClientConfigCallback(httpClientBuilder -> httpClientBuilder.setSSLContext(sslContext).setSSLHostnameVerifier(new NoopHostnameVerifier()))
-                    .setPathPrefix("elastic/api")
+                    .setPathPrefix(pathPrefix)
                     .build();
         } catch (Exception e) {
             // Error should never be thrown
