@@ -20,7 +20,7 @@ import com.efs.sdk.search.clients.OrganizationManagerClient;
 import com.efs.sdk.search.clients.ResultBuilder;
 import com.efs.sdk.search.commons.SearchException;
 import com.efs.sdk.search.helper.ParseHelper;
-import com.efs.sdk.search.model.elasticsearch.ESMappingFieldProperty;
+import com.efs.sdk.search.model.elasticsearch.ESFieldProperty;
 import com.efs.sdk.search.model.elasticsearch.ESResponse;
 import com.efs.sdk.search.model.search.Criteria;
 import com.efs.sdk.search.model.search.Query;
@@ -33,13 +33,12 @@ import java.util.*;
 public class SearchService {
 
 
+    private static final String MAPPINGS = "mappings";
+    private static final String PROPERTIES = "properties";
     private final ResultBuilder resultBuilder;
     private final ElasticSearchRestClient searchClient;
     private final OrganizationManagerClient organizationManagerClient;
-
     private final ParseHelper parseHelper;
-    private static final String MAPPINGS = "mappings";
-    private static final String PROPERTIES = "properties";
 
     public SearchService(ElasticSearchRestClient searchClient, ResultBuilder resultBuilder, OrganizationManagerClient organizationManagerClient) {
         this.searchClient = searchClient;
@@ -72,7 +71,7 @@ public class SearchService {
         Set<Criteria> criteria = new HashSet<>();
         for (Map<String, Object> filteredMappings : filteredMappingsList) {
             for (Object object : filteredMappings.values()) {
-                Map<String, Map<String, Map<String, ESMappingFieldProperty>>> mapping = parseHelper.parseMappingsFromObject(object);
+                Map<String, Map<String, Map<String, ESFieldProperty>>> mapping = parseHelper.parseMappingsFromObject(object);
                 if (mapping.containsKey(MAPPINGS) && mapping.get(MAPPINGS).containsKey(PROPERTIES)) {
                     parseHelper.parseProperties(criteria, "", mapping.get(MAPPINGS).get(PROPERTIES));
                 }
@@ -88,9 +87,9 @@ public class SearchService {
         Set<String> propertyNames = new HashSet<>();
         for (Map<String, Object> filteredMappings : filteredMappingsList) {
             for (Object object : filteredMappings.values()) {
-                Map<String, Map<String, Map<String, ESMappingFieldProperty>>> mappings = parseHelper.parseMappingsFromObject(object);
+                Map<String, Map<String, Map<String, ESFieldProperty>>> mappings = parseHelper.parseMappingsFromObject(object);
                 if (mappings != null && !mappings.isEmpty() && mappings.containsKey(MAPPINGS)) {
-                    Map<String, Map<String, ESMappingFieldProperty>> mapping = mappings.get(MAPPINGS);
+                    Map<String, Map<String, ESFieldProperty>> mapping = mappings.get(MAPPINGS);
                     if (mapping != null && !mapping.isEmpty() && mapping.containsKey(PROPERTIES)) {
                         parseHelper.parsePropertyNames(propertyNames, "", mapping.get(PROPERTIES));
                     }

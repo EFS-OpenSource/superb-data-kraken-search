@@ -16,7 +16,7 @@ limitations under the License.
 package com.efs.sdk.search.helper;
 
 import com.efs.sdk.search.commons.SearchException;
-import com.efs.sdk.search.model.elasticsearch.ESMappingFieldProperty;
+import com.efs.sdk.search.model.elasticsearch.ESFieldProperty;
 import com.efs.sdk.search.model.search.Criteria;
 import com.efs.sdk.search.model.search.DataType;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -34,25 +34,19 @@ import static java.lang.String.format;
 @Component
 public class ParseHelper {
 
-    private static final List<String> SKIP_PROPERTIES = Arrays.asList("_all_keyword_field", "_all_text_field");
-
     public static String wildcardToRegex(String pattern) {
         return "^" + pattern.replace("*", ".*").replace("?", ".") + "$";
     }
 
-    public void parseProperties(Set<Criteria> criteria, String prefix, Map<String, ESMappingFieldProperty> esProperties) {
+    public void parseProperties(Set<Criteria> criteria, String prefix, Map<String, ESFieldProperty> esProperties) {
 
         if (esProperties == null) {
             return;
         }
-        for (Map.Entry<String, ESMappingFieldProperty> propertyEntry : esProperties.entrySet()) {
+        for (Map.Entry<String, ESFieldProperty> propertyEntry : esProperties.entrySet()) {
             String propertyName = prefix.isBlank() ? propertyEntry.getKey() : format("%s.%s", prefix, propertyEntry.getKey());
 
-            if (SKIP_PROPERTIES.contains(propertyName)) {
-                continue;
-            }
-
-            ESMappingFieldProperty property = propertyEntry.getValue();
+            ESFieldProperty property = propertyEntry.getValue();
             if (property.isParent()) {
                 // Recursive call of function
                 parseProperties(criteria, propertyName, property.properties());
@@ -65,18 +59,14 @@ public class ParseHelper {
         }
     }
 
-    public void parsePropertyNames(Set<String> propertyNames, String prefix, Map<String, ESMappingFieldProperty> esProperties) {
+    public void parsePropertyNames(Set<String> propertyNames, String prefix, Map<String, ESFieldProperty> esProperties) {
         if (esProperties == null) {
             return;
         }
-        for (Map.Entry<String, ESMappingFieldProperty> propertyEntry : esProperties.entrySet()) {
+        for (Map.Entry<String, ESFieldProperty> propertyEntry : esProperties.entrySet()) {
             String propertyName = prefix.isBlank() ? propertyEntry.getKey() : String.format("%s.%s", prefix, propertyEntry.getKey());
 
-            if (SKIP_PROPERTIES.contains(propertyName)) {
-                continue;
-            }
-
-            ESMappingFieldProperty property = propertyEntry.getValue();
+            ESFieldProperty property = propertyEntry.getValue();
             if (property.isParent()) {
                 parsePropertyNames(propertyNames, propertyName, property.properties());
             } else {
@@ -85,7 +75,7 @@ public class ParseHelper {
         }
     }
 
-    protected DataType getDataType(ESMappingFieldProperty property) {
+    protected DataType getDataType(ESFieldProperty property) {
         if (List.of("float", "long").contains(property.type().toLowerCase())) {
             return NUMBER;
         }
@@ -116,7 +106,7 @@ public class ParseHelper {
         return initialMap.entrySet().stream().filter(o -> o.getKey().matches(wildcardToRegex(indexWildCard))).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    public Map<String, Map<String, Map<String, ESMappingFieldProperty>>> parseMappingsFromObject(Object indexMappings) throws SearchException {
+    public Map<String, Map<String, Map<String, ESFieldProperty>>> parseMappingsFromObject(Object indexMappings) throws SearchException {
         try {
             ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             return mapper.convertValue(indexMappings, new TypeReference<>() {

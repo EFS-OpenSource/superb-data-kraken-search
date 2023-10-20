@@ -1,7 +1,7 @@
 package com.efs.sdk.search.helper;
 
 import com.efs.sdk.search.commons.SearchException;
-import com.efs.sdk.search.model.elasticsearch.ESMappingFieldProperty;
+import com.efs.sdk.search.model.elasticsearch.ESFieldProperty;
 import com.efs.sdk.search.model.search.Criteria;
 import com.efs.sdk.search.model.search.DataType;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -46,7 +46,7 @@ class ParseHelperTest {
     void givenParseProperties_whenParseProperties_thenOk() throws Exception {
         String searchResult = getInputContent(ESRESULT_PATH, "sourceData.json");
         Map<String, Object> tempProps = readValue(searchResult, Map.class);
-        Map<String, ESMappingFieldProperty> properties = new ObjectMapper().convertValue(tempProps, new TypeReference<>() {
+        Map<String, ESFieldProperty> properties = new ObjectMapper().convertValue(tempProps, new TypeReference<>() {
         });
         Set<Criteria> criteria = new HashSet<>();
         parseHelper.parseProperties(criteria, "", properties);
@@ -70,7 +70,7 @@ class ParseHelperTest {
     void givenPropertyNames_whenGetPropertyNames_thenOk() throws Exception {
         String searchResult = getInputContent(ESRESULT_PATH, "sourceData.json");
         Map<String, Object> tempProps = readValue(searchResult, Map.class);
-        Map<String, ESMappingFieldProperty> properties = new ObjectMapper().convertValue(tempProps, new TypeReference<>() {
+        Map<String, ESFieldProperty> properties = new ObjectMapper().convertValue(tempProps, new TypeReference<>() {
         });
 
         Set<String> propertyNames = new HashSet<>();
@@ -84,35 +84,35 @@ class ParseHelperTest {
 
     @Test
     void givenFloat_whenGetDataType_thenNumber() {
-        ESMappingFieldProperty property = new ESMappingFieldProperty("float", new HashMap<>(), new HashMap<>(), true, true);
+        ESFieldProperty property = new ESFieldProperty("float", new HashMap<>(), new HashMap<>(), true, true);
         DataType expected = DataType.NUMBER;
         assertEquals(expected, parseHelper.getDataType(property));
     }
 
     @Test
     void givenLong_whenGetDataType_thenNumber() {
-        ESMappingFieldProperty property = new ESMappingFieldProperty("long", new HashMap<>(), new HashMap<>(), true, true);
+        ESFieldProperty property = new ESFieldProperty("long", new HashMap<>(), new HashMap<>(), true, true);
         DataType expected = DataType.NUMBER;
         assertEquals(expected, parseHelper.getDataType(property));
     }
 
     @Test
     void givenDate_whenGetDataType_thenDate() {
-        ESMappingFieldProperty property = new ESMappingFieldProperty("date", new HashMap<>(), new HashMap<>(), true, true);
+        ESFieldProperty property = new ESFieldProperty("date", new HashMap<>(), new HashMap<>(), true, true);
         DataType expected = DataType.DATE;
         assertEquals(expected, parseHelper.getDataType(property));
     }
 
     @Test
     void givenBoolean_whenGetDataType_thenBoolean() {
-        ESMappingFieldProperty property = new ESMappingFieldProperty("boolean", new HashMap<>(), new HashMap<>(), true, true);
+        ESFieldProperty property = new ESFieldProperty("boolean", new HashMap<>(), new HashMap<>(), true, true);
         DataType expected = DataType.BOOLEAN;
         assertEquals(expected, parseHelper.getDataType(property));
     }
 
     @Test
     void givenNoType_whenGetDataType_thenString() {
-        ESMappingFieldProperty property = new ESMappingFieldProperty("", new HashMap<>(), new HashMap<>(), true, true);
+        ESFieldProperty property = new ESFieldProperty("", new HashMap<>(), new HashMap<>(), true, true);
         DataType expected = DataType.STRING;
         assertEquals(expected, parseHelper.getDataType(property));
     }
@@ -124,7 +124,7 @@ class ParseHelperTest {
 
         for (String index : indexMappings.keySet()) {
             Object object = indexMappings.get(index);
-            Map<String, Map<String, Map<String, ESMappingFieldProperty>>> actual = this.parseHelper.parseMappingsFromObject(object);
+            Map<String, Map<String, Map<String, ESFieldProperty>>> actual = this.parseHelper.parseMappingsFromObject(object);
             assertFalse(actual.isEmpty());
         }
     }
