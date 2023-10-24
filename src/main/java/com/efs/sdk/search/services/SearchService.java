@@ -28,6 +28,7 @@ import com.efs.sdk.search.model.search.Result;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class SearchService {
@@ -58,11 +59,9 @@ public class SearchService {
 
     public Set<String> getIndices(String token, String indexWildcard) throws SearchException {
         List<Map<String, Object>> filteredMappingsList = getFilteredIndicesAndMappings(token, indexWildcard);
-        Set<String> indices = new HashSet<>();
-        for (Map<String, Object> filteredMappings : filteredMappingsList) {
-            indices.addAll(filteredMappings.keySet());
-        }
-        return indices;
+        return filteredMappingsList.stream()
+                .flatMap(filteredMappings -> filteredMappings.keySet().stream())
+                .collect(Collectors.toSet());
     }
 
     public List<Criteria> getCriteria(String token, String indexRegex) throws SearchException {
