@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-## 1.1.0 - 2023-10-10
+## 1.0.1 - 2023-10-18
 
 ### Added
 - fix dependency track findings
@@ -14,7 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - contributing guide
 
 ### Changed
-- none
+- workaround to get criteria, result properties and indices without all_access
+
 
 ### Removed
 - none

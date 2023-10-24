@@ -19,7 +19,7 @@ import org.elasticsearch.client.RestClient;
 
 public abstract class ElasticSearchClientBuilder {
 
-    protected String elasticsearchUrl;
+    protected final String elasticsearchUrl;
 
     ElasticSearchClientBuilder(String elasticsearchUrl) {
         this.elasticsearchUrl = elasticsearchUrl;

@@ -1,0 +1,31 @@
+apidoc:
+  title: SDK Search-API
+sdk:
+  oauth2:
+    config-url: https://$(DOMAIN)/auth/realms/$(REALM)/.well-known/openid-configuration
+    client-id: $(CLIENT_ID)
+    authorization-grant-type: authorization_code
+    scope: openid
+    user-name-attribute: preferred_username
+server:
+  port: 8090
+  servlet:
+    context-path: /search
+search:
+  elasticsearch:
+    url: https://sdk-dev.efs.ai
+    localPathPrefix:  "elastic/api"
+  organizationmanager-endpoints:
+    spaces: http://localhost:8091/organizationmanager/api/v2.0/spaces
+management:
+  endpoints:
+    web:
+      exposure:
+        include: [
+            prometheus,
+            health,
+            info
+        ]
+  health:
+    elasticsearch:
+      enabled: false
