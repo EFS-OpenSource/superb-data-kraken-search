@@ -16,6 +16,7 @@ limitations under the License.
 package com.efs.sdk.search.clients;
 
 import lombok.extern.slf4j.Slf4j;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -57,9 +58,13 @@ public class OrganizationManagerClient {
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
         headers.add("Authorization", "Bearer " + token);
 
+        JSONObject requestJson = new JSONObject();
+        requestJson.appendField("permissions", "READ");
+
+        HttpEntity<String> request = new HttpEntity<>(requestJson.toString(), headers);
         ParameterizedTypeReference<List<String>> responseType = new ParameterizedTypeReference<>() {
         };
-        ResponseEntity<List<String>> response = restTemplate.exchange(allSpacesEndpoint, HttpMethod.GET, new HttpEntity<>(headers), responseType);
+        ResponseEntity<List<String>> response = restTemplate.exchange(allSpacesEndpoint, HttpMethod.GET, request, responseType);
         return response.getBody();
     }
 
