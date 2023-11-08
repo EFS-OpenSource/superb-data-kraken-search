@@ -58,10 +58,10 @@ public class OrganizationManagerClient {
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
         headers.add("Authorization", "Bearer " + token);
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.appendField("permissions", "READ");
+        JSONObject requestJson = new JSONObject();
+        requestJson.appendField("permissions", "READ");
 
-        HttpEntity<String> request = new HttpEntity<>(jsonObject.toString(), headers);
+        HttpEntity<String> request = new HttpEntity<>(requestJson.toString(), headers);
         ParameterizedTypeReference<List<String>> responseType = new ParameterizedTypeReference<>() {
         };
         ResponseEntity<List<String>> response = restTemplate.exchange(allSpacesEndpoint, HttpMethod.GET, request, responseType);
