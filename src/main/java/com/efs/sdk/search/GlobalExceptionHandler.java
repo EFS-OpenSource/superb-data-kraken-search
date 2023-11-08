@@ -48,7 +48,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = SearchException.class)
     private ResponseEntity<Object> handleSearchException(SearchException ex, WebRequest request) {
-        log.debug(ex.getMessage(), ex);
+        log.error(ex.getMessage(), ex);
         // Creating a map to hold the error details.
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", new Date());
