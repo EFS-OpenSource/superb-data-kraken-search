@@ -16,5 +16,5 @@ limitations under the License.
 package com.efs.sdk.search.model.search;
 
 public enum Operator {
-    EQ, LIKE, NOT, GT, GTE, LT, LTE, BETWEEN, AND, OR;
+    EQ, LIKE, NOT, GT, GTE, LT, LTE, BETWEEN, AND, OR
 }
