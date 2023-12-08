@@ -27,6 +27,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -62,9 +63,11 @@ public class OrganizationManagerClient {
         requestJson.appendField("permissions", "READ");
 
         HttpEntity<String> request = new HttpEntity<>(requestJson.toString(), headers);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(allSpacesEndpoint)
+                .queryParam("permissions", "READ");
         ParameterizedTypeReference<List<String>> responseType = new ParameterizedTypeReference<>() {
         };
-        ResponseEntity<List<String>> response = restTemplate.exchange(allSpacesEndpoint, HttpMethod.GET, request, responseType);
+        ResponseEntity<List<String>> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, request, responseType);
         return response.getBody();
     }
 
