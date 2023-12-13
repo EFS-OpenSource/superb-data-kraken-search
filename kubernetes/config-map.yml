@@ -9,8 +9,8 @@ data:
       title: EFS SDK Search-API
     sdk:
       oauth2:
-        config-url: http://keycloak$(postfix)-http.operations.svc.cluster.local/auth/realms/efs-$(environment)/.well-known/openid-configuration
-        client-id: $(environment)-client
+        config-url: http://keycloak$(postfix)-http.operations.svc.cluster.local/auth/realms/$(REALM)/.well-known/openid-configuration
+        client-id: $(CLIENT_ID)
         authorization-grant-type: authorization_code
         scope: openid
         user-name-attribute: preferred_username
@@ -20,7 +20,7 @@ data:
         context-path: /search
     search:
       elasticsearch:
-        url: https://$(elasticsearch-service).elasticsearch.svc.cluster.local:9200
+        url: https://$(ELASTICSEARCH_SERVICE).elasticsearch.svc.cluster.local:9200
       organizationmanager-endpoints:
         spaces: http://organizationmanager$(postfix).backend.svc.cluster.local:8090/organizationmanager/api/v2.0/spaces
     management:

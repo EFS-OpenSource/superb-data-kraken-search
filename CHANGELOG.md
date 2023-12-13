@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- none
+
+### Changed
+- update logging library
+- adjusted properties for installation-guide
+
+### Removed
+- none
+
+---
+
 ## 1.1.0 - 2023-10-18
 
 ### Added
@@ -20,6 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 - none
+
+---
 
 ## 1.0.0 - 2023-09-28
 

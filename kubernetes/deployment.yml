@@ -22,10 +22,9 @@ spec:
       serviceAccountName: search-account
       containers:
       - name: search
-        image: acr$(environment).azurecr.io/search:$(tagVersion)
+        image: $(CONTAINER_REGISTRY)/search:$(tagVersion)
         imagePullPolicy: Always
         volumeMounts:
-
         - name: app-configuration
           mountPath: "/etc/application"
           readOnly: true
