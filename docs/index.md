@@ -65,7 +65,7 @@ The deployment manifest is [azure-pipeline.yml](azure-pipeline.yml).
 - Build and Push: an image is built using the [Dockerfile](Dockerfile) and pushed to the corresponding ACR (SDK or AICloud).
 - Deployment: kubernetes manifests are deployed to the corresponding AKS (SDK or AICloud):
     - [config-map.yml](kubernetes/config-map.yml) writes the spring boot configuration application.yml as a config map
-    - [permissions.yml](kubernetes/permissions.yml) gives permission for backend namespace
+    - [rbac.yml](kubernetes/rbac.yml) gives permission for backend namespace
     - [deployment.yml](kubernetes/deployment.yml)  yields the k8 deployment "search", i.e. describes the desired state for Pods and ReplicaSets
     - [service.yml](kubernetes/service.yml) yields the corresponding k8 service "search-service", i.e. an abstract way to expose an application running on a set
       of Pods as a network service.

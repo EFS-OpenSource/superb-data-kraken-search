@@ -1,18 +1,17 @@
 # Template parameters
 parameters:
-- name: stage
-  type: string
-  values:
-  - 'dev'
-  - 'prod'
-  default: 'dev'
+  - name: stage
+    type: string
+    values:
+      - 'dev'
+      - 'prod'
+    default: 'dev'
 
 
 variables:
   imageRepository: 'search'
-  containerRegistry: 'acr$(environment).azurecr.io'
+  containerRegistry: '$(CONTAINER_REGISTRY)'
   dockerfilePath: 'Dockerfile'
-  imagePullSecret: 'acr$(environment)-auth'
   ${{ if eq(parameters.stage, 'prod') }}:
     tagVersion: '$(Build.BuildId)'
     tagLatest: 'latest'
@@ -45,7 +44,7 @@ stages:
               effectivePomSkip: false
               sonarQubeRunAnalysis: false
   # Build stage:
-  # 1. Runs a a Maven task that is equivalent to a "mvn build" command to build the java project into a jar artifact.
+  # 1. Runs a Maven task that is equivalent to a "mvn build" command to build the java project into a jar artifact.
   # 2. Runs a Docker task that builds the artifact into a docker image and pushes it to ACR.
   # 3. Creates an artifact for the kubernetes folder holding the kubernetes yaml files.
   - stage: Build
@@ -87,12 +86,12 @@ stages:
           - upload: kubernetes
             artifact: kubernetes
 
-# Deploy stage:
-# 1. Runs a KubernetesManifest task that creates a kubernetes secret that hold the credentials to connect to ACR
-# 2. Runs a replacetokens task that replaces tokens in the kubernetes/*.yml files with pipeline environment variables
-# 3. Runs a KubernetesManifest task that
-#       1. deploys all the manifests in the kubernetes folder (= runs a "kubectl apply" for every one of them)
-#       2. retrieves the previously built docker image from ACR and deploys it
+  # Deploy stage:
+  # 1. Runs a KubernetesManifest task that creates a kubernetes secret that hold the credentials to connect to ACR
+  # 2. Runs a replacetokens task that replaces tokens in the kubernetes/*.yml files with pipeline environment variables
+  # 3. Runs a KubernetesManifest task that
+  #       1. deploys all the manifests in the kubernetes folder (= runs a "kubectl apply" for every one of them)
+  #       2. retrieves the previously built docker image from ACR and deploys it
   - stage: Deploy
     displayName: Deploy stage
     dependsOn: Build
@@ -111,20 +110,6 @@ stages:
                   inputs:
                     script: |
                       echo "kubernetesServiceConnection is $(kubernetesServiceConnection)"
-                      [[ ! -z "$(imagePullSecret)" ]] && echo "imagePullSecret is Not empty" || echo "imagePullSecret is Empty"
-                - task: KubernetesManifest@0
-                  inputs:
-                    action: 'createSecret'
-                    kubernetesServiceConnection: '$(kubernetesServiceConnection)'
-                    namespace: 'backend'
-                    secretType: 'dockerRegistry'
-                    secretName: '$(imagePullSecret)'
-                    dockerRegistryEndpoint: '$(dockerRegistryServiceConnection)'
-                - task: CmdLine@2
-                  inputs:
-                    script: |
-                      echo "environment is $(environment)"
-                      echo "elasticsearch-service is $(elasticsearch-service)"
                 - task: replacetokens@3
                   inputs:
                     rootDirectory: '$(Pipeline.Workspace)'
@@ -142,10 +127,9 @@ stages:
                     kubernetesServiceConnection: '$(kubernetesServiceConnection)'
                     namespace: 'backend'
                     manifests: |
-                      $(Pipeline.Workspace)/kubernetes/permissions.yml
+                      $(Pipeline.Workspace)/kubernetes/rbac.yml
                       $(Pipeline.Workspace)/kubernetes/config-map.yml
                       $(Pipeline.Workspace)/kubernetes/deployment.yml
                       $(Pipeline.Workspace)/kubernetes/service.yml
                       $(Pipeline.Workspace)/kubernetes/ingress.yml
                     containers: '$(containerRegistry)/$(imageRepository):$(tagVersion)'
-                    imagePullSecrets: '$(imagePullSecret)'

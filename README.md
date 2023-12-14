@@ -14,16 +14,16 @@
 
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
-- [Description](#description)
-- [Getting Started](#getting-started)
+- [Search-Service](#search-service)
+  - [Table of Contents](#table-of-contents)
+  - [Description](#description)
+  - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
     - [Configuration](#configuration)
     - [Usage](#usage)
-- [Built With](#built-with)
-- [Contributing](#contributing)
-- [Changelog](#changelog)
+  - [Contributing](#contributing)
+  - [Changelog](#changelog)
 
 ---
 
@@ -39,10 +39,10 @@ Although these endpoints can be utilized directly by users, their primary purpos
 the [Superb Data Kraken Frontend](https://github.com/EFS-OpenSource/superb-data-kraken-frontend).
 
 For a more detailed understanding of the broader context of the platform this project is used in, refer to
-the [architecture documentation](https://github.com/EFS-OpenSource/superb-data-kraken-architecture). (TODO)
+the [architecture documentation](https://efs-opensource.github.io/superbdatakraken/architecture/).
 
 For instructions on how to deploy the Search-Service on an instance of the **SDK**, refer to
-the [installation instructions](https://github.com/EFS-OpenSource/superb-data-kraken-install-instructions). (TODO)
+the [installation instructions](https://efs-opensource.github.io/superbdatakraken/operator-manual/installation/).
 
 Refer to [index.md](docs%2Findex.md) for more detailed but deployment specific documentation.
 
@@ -90,7 +90,6 @@ To set up your local environment for development and testing, follow these steps
 - Replace all placeholders enclosed in `$()`, e.g.:
     - `REALM`: the specific realm set up with the openid connect (oidc) provider.
     - `CLIENT_ID`: the unique identifier for the service account that the service utilizes.
-    - `CLIENT_SECRET`: the confidential passphrase or key associated with the service account.
 
 ### Usage
 
